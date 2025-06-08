@@ -1,6 +1,5 @@
 ﻿using BuildingBlocks.Behaviors;
 using BuildingBlocks.Messaging.MassTransit;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
