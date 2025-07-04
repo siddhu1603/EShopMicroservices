@@ -27,9 +27,12 @@ namespace Basket.API.Basket.CheckoutBasket
             //delete the basket
 
             var basket = await repository.GetBasket(command.BasketCheckoutDto.UserName, cancellationToken);
-            if (basket == null)
-                return new CheckoutBasketResult(false);
 
+            if (basket == null)
+            {
+                return new CheckoutBasketResult(false);
+            }
+                
             var eventMessage = command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
             eventMessage.TotalPrice = basket.TotalPrice;
 
@@ -38,8 +41,6 @@ namespace Basket.API.Basket.CheckoutBasket
             await repository.DeleteBasket(command.BasketCheckoutDto.UserName, cancellationToken);
 
             return new CheckoutBasketResult(true);
-
-
         }
     }
 }

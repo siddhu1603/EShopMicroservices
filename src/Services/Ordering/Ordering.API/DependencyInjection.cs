@@ -5,7 +5,7 @@ namespace Ordering.API
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddApiServices(this IServiceCollection services)  //this is an extension method for IServiceCollection type of vars.
+        public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)  //this is an extension method for IServiceCollection type of vars.
         {
             services.AddCarter();
             services.AddExceptionHandler<CustomExceptionHandler>();

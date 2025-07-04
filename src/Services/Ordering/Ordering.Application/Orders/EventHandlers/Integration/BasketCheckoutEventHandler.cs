@@ -4,15 +4,16 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Dtos;
 using Ordering.Application.Orders.Commands.CreateOrder;
-using Ordering.Domain.ValueObjects;
-using System.Net.Mail;
-using System.Reflection.Emit;
 
 namespace Ordering.Application.Orders.EventHandlers.Integration
 {
     public class BasketCheckoutEventHandler(ISender sender, ILogger<BasketCheckoutEventHandler> logger) : IConsumer<BasketCheckoutEvent>
     {
-        public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
+        //Publishing the event in the Basket microservice triggers the Consume method in the Ordering microservice,
+        //connecting the two services via the event-driven architecture.
+        //In Ordering microservice, the BasketCheckoutEventHandler class implements IConsumer<BasketCheckoutEvent>.
+        //MassTransit automatically routes the published event to any consumers that handle this event type.
+        public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)  
         {
             //create new order and start order fulfillment process
             logger.LogInformation("Integration event handler: {IntegrationEvent}", context.Message.GetType().Name);
@@ -23,8 +24,8 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
 
         private CreateOrderCommand MapToCreateOrderCommand(BasketCheckoutEvent message)
         {
-            var addressDto = new AddressDto(message.FirstName, message.LastName, message.EmailAddress, message.AddressLine, message.Country, message.State, message.ZipCode);
-            var paymentDto = new PaymentDto(message.CardName, message.CardNumber, message.Expiration, message.CVV, message.PaymentMethod);
+            var addressDto = new AddressDto(message.FirstName, message.LastName, message.EmailAddress, message.AddressLine, message.Country, message.ZipCode, message.State);
+            var paymentDto = new PaymentDto(message.CardName, message.Expiration, message.CVV, message.CardNumber, message.PaymentMethod);
             var orderId = Guid.NewGuid();
 
             var orderDto = new OrderDto
@@ -38,8 +39,8 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
                 Status: Ordering.Domain.Enums.OrderStatus.Pending,
                 OrderItems:
                 [
-                    new OrderItemDto(orderId, new Guid("92b4dcf8-4f1d-425f-8546-efc77679cb82"), 2, 5000),
-                    new OrderItemDto(orderId, new Guid("39a8846c-46f8-4c5e-947d-60b573cd57aa"), 3, 4000)
+                    new OrderItemDto(orderId, new Guid("7bb99494-f1be-47aa-8fba-1fc964bd5942"), 2, 9500),
+                    new OrderItemDto(orderId, new Guid("23e1f134-1151-42cf-a9a4-072f8278ec7f"), 4, 20000)
                 ]
             );
 

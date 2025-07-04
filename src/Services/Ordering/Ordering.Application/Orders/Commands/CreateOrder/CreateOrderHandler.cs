@@ -16,8 +16,6 @@ namespace Ordering.Application.Orders.Commands.CreateOrder
             await dbContext.SaveChangesAsync(cancellationToken);
 
             return new CreateOrderResult(order.Id.Value);
-
-            throw new NotImplementedException();
         }
 
         private Order CreateNewOrder(OrderDto orderDto)  //This builds the actual Order obj from the OrderDto obj.

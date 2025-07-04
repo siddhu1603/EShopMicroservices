@@ -15,7 +15,7 @@ namespace Ordering.Infrastructure
             var connectionString = configuration.GetConnectionString("Database");
             //Add Services to the container.
 
-            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();      // the order of adding teh interceptors matters here.
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();      // the order of adding the interceptors matters here.
             services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
             services.AddDbContext<ApplicationDbContext>((sp, options) =>

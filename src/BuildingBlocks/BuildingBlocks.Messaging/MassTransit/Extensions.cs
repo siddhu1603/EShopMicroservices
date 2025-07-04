@@ -9,8 +9,6 @@ namespace BuildingBlocks.Messaging.MassTransit
     {
         public static IServiceCollection AddMessageBroker(this IServiceCollection services, IConfiguration configuration, Assembly? assembly = null)
         {
-            //inmplement rabbitmq masstransit configuration
-
             services.AddMassTransit(config =>
             {
                 config.SetKebabCaseEndpointNameFormatter();

@@ -1,11 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Ordering.Domain.Abstractions;
-using System.ComponentModel.DataAnnotations;
 
 namespace Ordering.Infrastructure.Data.Interceptors
 {
