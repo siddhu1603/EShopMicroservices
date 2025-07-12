@@ -108,8 +108,8 @@ services:
       - ConnectionStrings__Database=Server=orderdb;Database=OrderDb;User Id=sa;Password=Siddhu@02;Encrypt=False;TrustServerCertificate=True
       - MessageBroker__Host=amqp://ecommerce-mq:5672
       - MessageBroker__UserName=guest
-      - messageBroker__Password=guest
-      - FeatureManagement__OrderFullfilment=False
+      - MessageBroker__Password=guest
+      - FeatureManagement__OrderFullfilment=True
     depends_on:
       - orderdb
       - messagebroker

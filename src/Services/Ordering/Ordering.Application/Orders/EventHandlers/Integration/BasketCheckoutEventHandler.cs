@@ -39,8 +39,8 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
                 Status: Ordering.Domain.Enums.OrderStatus.Pending,
                 OrderItems:
                 [
-                    new OrderItemDto(orderId, new Guid("7bb99494-f1be-47aa-8fba-1fc964bd5942"), 2, 9500),
-                    new OrderItemDto(orderId, new Guid("23e1f134-1151-42cf-a9a4-072f8278ec7f"), 4, 20000)
+                    new OrderItemDto(orderId, new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"), 2, 400),
+                    new OrderItemDto(orderId, new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8"), 4, 650)
                 ]
             );
 

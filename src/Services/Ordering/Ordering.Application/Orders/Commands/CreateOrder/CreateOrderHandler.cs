@@ -10,11 +10,19 @@ namespace Ordering.Application.Orders.Commands.CreateOrder
     {
         public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
         {
-            var order = CreateNewOrder(command.Order);  //In the Command Obj we are passing an OrderDto, so we need to build an actual Order obj from it. 
-
+            var order = CreateNewOrder(command.Order);
+            Console.WriteLine($"[DEBUG] Order to save: {order.Id}, Items: {order.OrderItems.Count}");
             dbContext.Orders.Add(order);
-            await dbContext.SaveChangesAsync(cancellationToken);
-
+            try
+            {
+                await dbContext.SaveChangesAsync(cancellationToken);
+                Console.WriteLine("[DEBUG] Order saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Exception during SaveChangesAsync: {ex}");
+                throw;
+            }
             return new CreateOrderResult(order.Id.Value);
         }
 
